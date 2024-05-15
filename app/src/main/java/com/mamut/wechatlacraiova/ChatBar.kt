@@ -34,10 +34,12 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun ChatBar(modifier: Modifier = Modifier){
     BottomAppBar(
@@ -50,7 +52,7 @@ fun ChatBar(modifier: Modifier = Modifier){
         Box(
             modifier = Modifier
                 .background(
-                    color = Color(4, 155, 19, 255),
+                    color = Color(237, 180, 88, 255),
                     shape = RoundedCornerShape(50.dp, 50.dp, 50.dp, 50.dp)
                 )
                 .border(
@@ -79,7 +81,7 @@ fun ChatBar(modifier: Modifier = Modifier){
                     modifier = Modifier
                         .weight(85f)
                         .clip(RoundedCornerShape(50.dp, 50.dp, 50.dp, 50.dp)),
-                    placeholder = { Text(text = "Enter text...")}
+                    placeholder = { Text(text = "Enter text...", color = Color(92, 88, 88, 255))}
                 )
 
                 IconButton(
