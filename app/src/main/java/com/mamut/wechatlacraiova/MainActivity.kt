@@ -46,9 +46,9 @@ fun MainUI(modifier: Modifier = Modifier) {
         bottomBar = { ChatBar()},
         containerColor = Color(186, 212, 170, 255),
         content = { innerPadding ->
-            LazyColumn(modifier = Modifier.padding(innerPadding)) {
+            //LazyColumn(modifier = Modifier.padding(innerPadding)) {
+            Messages(innerPadding)
 
-            }
         }
     )
 }
