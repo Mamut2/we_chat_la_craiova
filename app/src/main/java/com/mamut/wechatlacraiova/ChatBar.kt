@@ -18,6 +18,7 @@ import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
@@ -64,7 +65,7 @@ fun ChatBar(modifier: Modifier = Modifier){
                 modifier = Modifier
                     .fillMaxSize()
             ){
-                var fieldText by remember { mutableStateOf("Enter text") }
+                var fieldText by remember { mutableStateOf("") }
                 TextField(
                     value = fieldText, onValueChange = { fieldText = it},
                     colors = TextFieldDefaults.colors(
@@ -78,6 +79,7 @@ fun ChatBar(modifier: Modifier = Modifier){
                     modifier = Modifier
                         .weight(85f)
                         .clip(RoundedCornerShape(50.dp, 50.dp, 50.dp, 50.dp)),
+                    placeholder = { Text(text = "Enter text...")}
                 )
 
                 IconButton(
