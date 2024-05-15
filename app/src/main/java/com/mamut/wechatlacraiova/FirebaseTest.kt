@@ -16,12 +16,12 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 
 lateinit var dbr: DatabaseReference
-fun main(context : Context, mesaj: String ) {
-    FirebaseApp.initializeApp(context)
+fun main(mesaj: String ) {
     dbr= FirebaseDatabase.getInstance("https://wechatlacraiova-default-rtdb.europe-west1.firebasedatabase.app/").getReference()
     dbr.push().setValue(mesaj)
-    dbreadlistener()
+    //dbreadlistener()
 }
+/*
 fun dbreadlistener(){
     val msgListen = object : ValueEventListener {
         override fun onDataChange(snapshot: DataSnapshot) {
@@ -39,6 +39,6 @@ fun dbreadlistener(){
     }
 
 }
-
+*/
 
 
