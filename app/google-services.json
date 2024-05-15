@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "715852373610",
+    "firebase_url": "https://wechatlacraiova-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "wechatlacraiova",
+    "storage_bucket": "wechatlacraiova.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715852373610:android:4deaa3ea69283d0ebc7413",
+        "android_client_info": {
+          "package_name": "com.mamut.wechatlacraiova"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRsGEledCmaP6DUpUR4PeZLwmxhScNGPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

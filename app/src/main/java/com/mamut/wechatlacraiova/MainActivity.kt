@@ -18,6 +18,8 @@ import com.mamut.wechatlacraiova.ui.theme.WeChatLaCraiovaTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        main(this,"test1")
+        main(this,"test2")
         enableEdgeToEdge()
         setContent {
             WeChatLaCraiovaTheme {
@@ -42,7 +44,10 @@ fun MainUI(modifier: Modifier = Modifier) {
         }
     )
 }
-
+@Composable
+fun Afis(text : String){
+    Text(text = text)
+}
 @Preview(showBackground = true)
 @Composable
 fun UIPreview() {
