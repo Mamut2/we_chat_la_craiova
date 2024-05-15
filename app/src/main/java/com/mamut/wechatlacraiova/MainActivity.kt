@@ -1,8 +1,10 @@
 package com.mamut.wechatlacraiova
 
 import android.R
+import android.content.ContentValues
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import androidx.activity.ComponentActivity
@@ -24,14 +26,21 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.google.firebase.FirebaseApp
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.mamut.wechatlacraiova.ui.theme.WeChatLaCraiovaTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        FirebaseApp.initializeApp(this)
+
+        FirebaseApp.initializeApp(this)             // Firebase
+        dbr = FirebaseDatabase.getInstance("https://wechatlacraiova-default-rtdb.europe-west1.firebasedatabase.app/").getReference()
+        readMessages()
+
         enableEdgeToEdge()
-        hideSystemUI(window)
+        hideSystemUI(window)  // Hide navigation bar
+
         setContent {
             WeChatLaCraiovaTheme {
                 MainUI()
@@ -46,9 +55,7 @@ fun MainUI(modifier: Modifier = Modifier) {
         bottomBar = { ChatBar()},
         containerColor = Color(186, 212, 170, 255),
         content = { innerPadding ->
-            //LazyColumn(modifier = Modifier.padding(innerPadding)) {
-            Messages(innerPadding)
-
+            ChatLog(innerPadding)
         }
     )
 }

@@ -1,5 +1,6 @@
 package com.mamut.wechatlacraiova
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -14,31 +15,32 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 
 lateinit var dbr: DatabaseReference
-fun main(mesaj: String ) {
-    dbr= FirebaseDatabase.getInstance("https://wechatlacraiova-default-rtdb.europe-west1.firebasedatabase.app/").getReference()
-    dbr.push().setValue(mesaj)
-    //dbreadlistener()
-}
-/*
-fun dbreadlistener(){
-    val msgListen = object : ValueEventListener {
-        override fun onDataChange(snapshot: DataSnapshot) {
-            for(msgSnapshot in snapshot.children){
-                val chatMessage = msgSnapshot.getValue()
-                chatMessage?.let {
-                    Log.d("mesaj",chatMessage.toString())
-                }
-            }
-        }
-        override fun onCancelled(error: DatabaseError) {
-            Log.d("eroare","eroare la listener")
-        }
-
+val db: FirebaseFirestore
+    get() {
+        return Firebase.firestore
     }
 
+fun pushMessage(message: String ) {
+    dbr.push().setValue(message)
 }
-*/
+
+fun readMessages(){
+    dbr.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(dataSnapshot: DataSnapshot){
+                texts.add(dataSnapshot.children.last().value.toString())
+            }
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException())
+            }
+        }
+    )
+}
+
+
 
 
