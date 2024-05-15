@@ -43,6 +43,7 @@ fun ChatBar(modifier: Modifier = Modifier){
         containerColor = Color.Transparent,
         modifier = Modifier
             .padding(10.dp, 0.dp, 10.dp, 20.dp)
+            .height(60.dp)
     ){
         Box(
             modifier = Modifier
