@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainUI(modifier: Modifier = Modifier) {
-    Scaffold (bottomBar = { ChatBar()}, containerColor = Color(94, 94, 94, 256)){ innerPadding->
+    Scaffold (bottomBar = { ChatBar()}, containerColor = Color(94, 94, 94, 254)){ innerPadding->
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
 
         }
