@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,30 +21,25 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeChatLaCraiovaTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Mamur",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                MainUI()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier,
-        color = Color(123,88,4)
-    )
+fun MainUI(modifier: Modifier = Modifier) {
+    Scaffold (bottomBar = { ChatBar()}){ innerPadding->
+        LazyColumn(modifier = Modifier.padding(innerPadding)) {
+
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun UIPreview() {
     WeChatLaCraiovaTheme {
-        Greeting("Android")
+        MainUI()
     }
 }
