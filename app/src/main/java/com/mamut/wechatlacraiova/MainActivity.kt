@@ -25,7 +25,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        hideSystemUI(window)
         setContent {
             WeChatLaCraiovaTheme {
                 MainUI()
@@ -52,18 +51,5 @@ fun MainUI(modifier: Modifier = Modifier) {
 fun UIPreview() {
     WeChatLaCraiovaTheme {
         MainUI()
-    }
-}
-
-private fun hideSystemUI(window: Window) {
-    WindowCompat.setDecorFitsSystemWindows(window, false)
-    WindowInsetsControllerCompat(window,
-        window.decorView.findViewById(R.id.content)).let { controller ->
-        controller.hide(WindowInsetsCompat.Type.systemBars())
-
-        // When the screen is swiped up at the bottom
-        // of the application, the navigationBar shall
-        // appear for some time
-        controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
     }
 }

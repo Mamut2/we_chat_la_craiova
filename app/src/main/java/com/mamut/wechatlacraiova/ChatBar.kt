@@ -32,6 +32,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -43,7 +44,7 @@ fun ChatBar(modifier: Modifier = Modifier){
         containerColor = Color.Transparent,
         modifier = Modifier
             .padding(10.dp, 0.dp, 10.dp, 20.dp)
-            .height(60.dp)
+            .height(70.dp)
     ){
         Box(
             modifier = Modifier
@@ -70,11 +71,13 @@ fun ChatBar(modifier: Modifier = Modifier){
                         focusedContainerColor = Color.Transparent,
                         unfocusedContainerColor = Color.Transparent,
                         disabledContainerColor = Color.Transparent,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        disabledIndicatorColor = Color.Transparent
                     ),
                     modifier = Modifier
                         .weight(85f)
-                        .fillMaxSize()
-                        .clip(RoundedCornerShape(50.dp, 50.dp, 50.dp, 50.dp))
+                        .clip(RoundedCornerShape(50.dp, 50.dp, 50.dp, 50.dp)),
                 )
 
                 IconButton(
