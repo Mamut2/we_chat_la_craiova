@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.mamut.wechatlacraiova.ui.theme.WeChatLaCraiovaTheme
 
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
             WeChatLaCraiovaTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = "Mamur",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -34,7 +35,8 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
-        modifier = modifier
+        modifier = modifier,
+        color = Color(123,88,4)
     )
 }
 
