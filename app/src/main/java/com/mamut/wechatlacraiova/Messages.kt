@@ -60,7 +60,7 @@ fun Message(text: String){
         elevation = CardDefaults.cardElevation(2.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp, 0.dp, 110.dp, 0.dp)
+            .padding(10.dp, 0.dp, 40.dp, 0.dp)
             .wrapContentSize(
                 align = Alignment.CenterStart
             ),
