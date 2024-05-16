@@ -52,7 +52,7 @@ fun Message(text: String){
         elevation = CardDefaults.cardElevation(4.dp),
         border = BorderStroke(2.dp, Color(red = 255f, green = 255f, blue = 255f, alpha = 255f)) ///AJUTOR DC NU SE SCHIMBA CULOAREA
         //Color(186, 212, 170, 256))
-    //.width(10.dp) - nu merge wtff
+        //.width(10.dp) - nu merge wtff
     ){
         Text(text = text)
     }
