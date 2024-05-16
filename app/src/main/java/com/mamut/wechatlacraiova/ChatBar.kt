@@ -85,7 +85,10 @@ fun ChatBar(modifier: Modifier = Modifier){
                 )
 
                 IconButton(
-                    onClick = { pushMessage(fieldText.toString()) },
+                    onClick = {
+                        pushMessage(fieldText.toString())
+                        fieldText = ""
+                              },
                     content = {
                         Icon(Icons.Filled.ArrowForward, contentDescription = null)
                     },
