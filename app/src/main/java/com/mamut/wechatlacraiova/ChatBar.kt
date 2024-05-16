@@ -91,6 +91,7 @@ fun ChatBar(modifier: Modifier = Modifier){
                 )
                 IconButton(
                     onClick = {
+
                         if(checkTextField(fieldText.toString()) != "") {
                             pushMessage(fieldText.toString())
                             fieldText = ""
