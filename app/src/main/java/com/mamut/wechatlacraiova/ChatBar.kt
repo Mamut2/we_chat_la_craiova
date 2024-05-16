@@ -83,14 +83,9 @@ fun ChatBar(modifier: Modifier = Modifier){
                         .clip(RoundedCornerShape(50.dp, 50.dp, 50.dp, 50.dp)),
                     placeholder = { Text(text = "Enter text...", color = Color(92, 88, 88, 255))}
                 )
-
                 IconButton(
                     onClick = {
-                        var ok=0;
-                        for (i in 0..fieldText.length - 1)
-                        if(fieldText[i] != ' ')
-                            ok=1;
-                        if(ok==1) {
+                        if(checkTextField(fieldText)) {
                             pushMessage(fieldText.toString())
                             fieldText = ""
                         }
@@ -101,8 +96,12 @@ fun ChatBar(modifier: Modifier = Modifier){
                     modifier = Modifier
                         .weight(15f)
                         .fillMaxSize()
+
                 )
             }
         }
     }
+}
+fun checkTextField(text:String):Boolean {
+    return text != "" && text[text.length - 1] != ' '
 }
