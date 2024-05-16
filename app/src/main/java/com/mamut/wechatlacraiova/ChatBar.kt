@@ -91,11 +91,11 @@ fun ChatBar(modifier: Modifier = Modifier){
                 )
                 IconButton(
                     onClick = {
-                        if(checkTextField(fieldText)) {
+                        if(checkTextField(fieldText.toString()) != "") {
                             pushMessage(fieldText.toString())
                             fieldText = ""
                         }
-                              },
+                    },
                     content = {
                         Icon(Icons.Filled.ArrowForward, contentDescription = null)
                     },
@@ -107,6 +107,11 @@ fun ChatBar(modifier: Modifier = Modifier){
         }
     }
 }
-fun checkTextField(text:String):Boolean {
-    return text != "" && text[text.length - 1] != ' '
+fun checkTextField(text:String):String {
+    if(text != "" && text[text.length - 1] != ' ') {
+        if (text[text.length - 1] == '\n')
+            return checkTextField(text.dropLast(1))
+        else return text
+    }
+    return ""
 }
