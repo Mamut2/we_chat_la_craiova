@@ -18,7 +18,9 @@ import com.google.firebase.database.database
 import com.google.firebase.database.snapshots
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.last
+import kotlin.time.Duration.Companion.seconds
 
 lateinit var dbr: DatabaseReference
 val db: FirebaseFirestore
@@ -31,9 +33,6 @@ fun pushMessage(message: String ) {
 }
 
 fun readMessages(){
-    dbr.get().result.children.forEach { child ->
-        texts.add(child.value.toString())
-    }
 
     dbr.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot){
