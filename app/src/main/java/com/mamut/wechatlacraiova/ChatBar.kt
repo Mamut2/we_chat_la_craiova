@@ -102,7 +102,6 @@ fun ChatBar(modifier: Modifier = Modifier){
                     modifier = Modifier
                         .weight(15f)
                         .fillMaxSize()
-
                 )
             }
         }

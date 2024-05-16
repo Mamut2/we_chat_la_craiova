@@ -34,7 +34,7 @@ fun pushMessage(message: String ) {
 }
 
 fun readMessages(){
-    dbr.get().addOnSuccessListener(OnSuccessListener{data ->
+    dbr.get().addOnSuccessListener(OnSuccessListener{ data ->
         data.children.forEach{
             texts.add(it.value.toString())
         }
