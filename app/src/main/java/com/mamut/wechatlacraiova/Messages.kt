@@ -3,6 +3,7 @@ package com.mamut.wechatlacraiova
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.colorspace.ColorSpace
 import androidx.compose.ui.graphics.colorspace.ColorSpaces
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 
@@ -28,16 +30,20 @@ fun ChatLog(innerPadding:PaddingValues){
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(innerPadding)
+            .padding(innerPadding),
     ){
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(0.dp, 30.dp, 0.dp, 0.dp),
-            verticalArrangement = Arrangement.spacedBy(5.dp)
+        Column(
+            verticalArrangement = Arrangement.Bottom,
+            modifier = Modifier.fillMaxSize()
         ) {
-            items(texts){text->
-                Message(text = text)
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(5.dp),
+                modifier = Modifier
+                    .padding(0.dp, 0.dp, 0.dp, 10.dp)
+            ) {
+                items(texts){text->
+                    Message(text = text)
+                }
             }
         }
     }
