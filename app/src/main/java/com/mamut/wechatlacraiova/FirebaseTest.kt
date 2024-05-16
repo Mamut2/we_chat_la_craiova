@@ -15,8 +15,10 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import com.google.firebase.database.snapshots
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.flow.last
 
 lateinit var dbr: DatabaseReference
 val db: FirebaseFirestore
@@ -29,6 +31,10 @@ fun pushMessage(message: String ) {
 }
 
 fun readMessages(){
+    dbr.get().result.children.forEach { child ->
+        texts.add(child.value.toString())
+    }
+
     dbr.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot){
                 texts.add(dataSnapshot.children.last().value.toString())
