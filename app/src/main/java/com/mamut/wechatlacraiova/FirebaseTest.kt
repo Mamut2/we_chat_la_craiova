@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.DataSnapshot
@@ -33,10 +34,15 @@ fun pushMessage(message: String ) {
 }
 
 fun readMessages(){
+    dbr.get().addOnSuccessListener(OnSuccessListener{data ->
+        data.children.forEach{
+            texts.add(it.value.toString())
+        }
+    })
 
     dbr.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot){
-                texts.add(dataSnapshot.children.last().value.toString())
+                if(!texts.isEmpty()) texts.add(dataSnapshot.children.last().value.toString())
             }
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
