@@ -34,12 +34,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        enableEdgeToEdge()
+        hideSystemUI(window)  // Hide navigation bar
+
         FirebaseApp.initializeApp(this)             // Firebase
         dbr = FirebaseDatabase.getInstance("https://wechatlacraiova-default-rtdb.europe-west1.firebasedatabase.app/").getReference()
         readMessages()
-
-        enableEdgeToEdge()
-        hideSystemUI(window)  // Hide navigation bar
 
         setContent {
             WeChatLaCraiovaTheme {

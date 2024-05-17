@@ -28,24 +28,22 @@ import kotlinx.coroutines.flow.last
 import kotlin.time.Duration.Companion.seconds
 
 lateinit var dbr: DatabaseReference
-val db: FirebaseFirestore
-    get() {
-        return Firebase.firestore
-    }
 
 var finishedLoadingMessages by mutableStateOf(false)
+var lastLoadedMessageIndex = 0
+const val numberOfMessagesToLoad = 20
 
 fun pushMessage(message: String ) {
     dbr.push().setValue(message)
 }
 
-fun readMessages(){
-    dbr.get().addOnSuccessListener(OnSuccessListener{ data ->
-        data.children.forEach{
-            texts.add(it.value.toString())
-        }
+fun readMessages() {
+    dbr.get().addOnSuccessListener { data ->
+        for (i in (if (data.childrenCount - numberOfMessagesToLoad < 0) 0 else data.childrenCount - numberOfMessagesToLoad)..<data.childrenCount)
+            texts.add(data.children.elementAt(i.toInt()).value.toString())
+        lastLoadedMessageIndex = (if (data.childrenCount - numberOfMessagesToLoad < 0) 0 else data.childrenCount - numberOfMessagesToLoad).toInt()
         finishedLoadingMessages = true
-    })
+    }
 
     dbr.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot){
@@ -57,6 +55,14 @@ fun readMessages(){
             }
         }
     )
+}
+
+fun loadOldMessages() {
+    dbr.get().addOnSuccessListener { data ->
+        for (i in (if (lastLoadedMessageIndex - numberOfMessagesToLoad < 0) 0 else lastLoadedMessageIndex - numberOfMessagesToLoad)..<lastLoadedMessageIndex)
+            texts.add(0, data.children.elementAt(i).value.toString())
+        lastLoadedMessageIndex = (if (lastLoadedMessageIndex - numberOfMessagesToLoad < 0) 0 else lastLoadedMessageIndex - numberOfMessagesToLoad).toInt()
+    }
 }
 
 

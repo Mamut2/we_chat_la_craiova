@@ -1,5 +1,6 @@
 package com.mamut.wechatlacraiova
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Updater
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -71,6 +73,13 @@ fun ChatLog(innerPadding:PaddingValues){
             )
             val listState = rememberLazyListState()
 
+            val reachedTop: Boolean by remember {
+                derivedStateOf {
+                    val firstVisibleItem = listState.layoutInfo.visibleItemsInfo.firstOrNull()
+                    firstVisibleItem?.index == 0
+                }
+            }
+
             LazyColumn(
                 state=listState,
                 verticalArrangement = Arrangement.spacedBy(5.dp),
@@ -89,6 +98,10 @@ fun ChatLog(innerPadding:PaddingValues){
                     listState.animateScrollToItem(index = listState.layoutInfo.totalItemsCount - 1)
                     finishedLoadingMessages = false
                 }
+            }
+
+            LaunchedEffect(reachedTop) {
+                if(reachedTop) loadOldMessages()
             }
         }
     }
