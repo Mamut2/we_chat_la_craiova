@@ -67,7 +67,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview
 @Composable
 fun MainUI(modifier: Modifier = Modifier) {
     //InitializeListState()
