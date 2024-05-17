@@ -29,9 +29,8 @@ import kotlin.time.Duration.Companion.seconds
 
 lateinit var dbr: DatabaseReference
 
-var finishedLoadingMessages by mutableStateOf(false)
 var lastLoadedMessageIndex = 0
-const val numberOfMessagesToLoad = 20
+const val numberOfMessagesToLoad = 21
 
 fun pushMessage(message: String ) {
     dbr.push().setValue(message)
@@ -39,15 +38,14 @@ fun pushMessage(message: String ) {
 
 fun readMessages() {
     dbr.get().addOnSuccessListener { data ->
-        for (i in (if (data.childrenCount - numberOfMessagesToLoad < 0) 0 else data.childrenCount - numberOfMessagesToLoad)..<data.childrenCount)
+        for (i in data.childrenCount - 1 downTo (if (data.childrenCount - numberOfMessagesToLoad < 0) 0 else data.childrenCount - numberOfMessagesToLoad))
             texts.add(data.children.elementAt(i.toInt()).value.toString())
         lastLoadedMessageIndex = (if (data.childrenCount - numberOfMessagesToLoad < 0) 0 else data.childrenCount - numberOfMessagesToLoad).toInt()
-        finishedLoadingMessages = true
     }
 
     dbr.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot){
-                if(!texts.isEmpty()) texts.add(dataSnapshot.children.last().value.toString())
+                if(!texts.isEmpty()) texts.add(0, dataSnapshot.children.last().value.toString())
             }
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
@@ -59,8 +57,8 @@ fun readMessages() {
 
 fun loadOldMessages() {
     dbr.get().addOnSuccessListener { data ->
-        for (i in (if (lastLoadedMessageIndex - numberOfMessagesToLoad < 0) 0 else lastLoadedMessageIndex - numberOfMessagesToLoad)..<lastLoadedMessageIndex)
-            texts.add(0, data.children.elementAt(i).value.toString())
+        for (i in lastLoadedMessageIndex - 1 downTo  (if (lastLoadedMessageIndex - numberOfMessagesToLoad < 0) 0 else lastLoadedMessageIndex - numberOfMessagesToLoad))
+            texts.add(data.children.elementAt(i).value.toString())
         lastLoadedMessageIndex = (if (lastLoadedMessageIndex - numberOfMessagesToLoad < 0) 0 else lastLoadedMessageIndex - numberOfMessagesToLoad).toInt()
     }
 }

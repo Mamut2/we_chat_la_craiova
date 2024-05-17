@@ -95,7 +95,6 @@ fun ChatBar(modifier: Modifier = Modifier){
                         if(textWithRemovedEndWhiteSpaces != "") {
                             pushMessage(textWithRemovedEndWhiteSpaces)
                             fieldText = ""
-                            finishedLoadingMessages = true
                         }
                     },
                     content = {
