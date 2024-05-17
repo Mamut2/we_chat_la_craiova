@@ -69,8 +69,14 @@ fun ChatLog(innerPadding:PaddingValues){
             val listState = rememberLazyListState()
             val coroutineScope = rememberCoroutineScope()
 
+            LaunchedEffect(key1 = finishedLoadingMessages) {
+                coroutineScope.launch {
+                    listState.animateScrollToItem(index = listState.layoutInfo.totalItemsCount - 1)
+                }
+            }
+
             LazyColumn(
-                state=listState,
+                state = listState,
                 verticalArrangement = Arrangement.spacedBy(5.dp),
                 modifier = Modifier
                     .padding(0.dp, 5.dp, 0.dp, 10.dp)
@@ -83,7 +89,7 @@ fun ChatLog(innerPadding:PaddingValues){
             }
 
             // Buton de scroll la ultimu mesaj
-            Surface(color=Color.Yellow,
+            /*Surface(color=Color.Yellow,
                 modifier = Modifier
                     .align(Alignment.End)
                     .padding(0.dp, 0.dp, 15.dp, 10.dp),
@@ -96,7 +102,7 @@ fun ChatLog(innerPadding:PaddingValues){
                         contentDescription = null
                     )
                 }, onClick = { coroutineScope.launch { listState.animateScrollToItem(index = listState.layoutInfo.totalItemsCount - 1) } })
-            }
+            }*/
         }
     }
 }
