@@ -32,21 +32,6 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.database.FirebaseDatabase
 import com.mamut.wechatlacraiova.ui.theme.WeChatLaCraiovaTheme
 
-/*
-class OtherClass {
-    @Composable
-    fun accessListState() {
-        // Call the composable function to initialize listState
-        InitializeListState()
-
-        // Access the listState variable
-        MyViewModel.listState
-    }
-}
- */
-
-
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,9 +97,3 @@ private fun hideSystemUI(window: Window) {
         controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
     }
 }
-
-/*
-fun Scrolltolast(){
-    coroutineScope.launch{listState.animateScrollToItem(index = listState.layoutInfo.totalItemsCount - 1)}
-}
-*/
