@@ -90,7 +90,7 @@ fun ChatLog(innerPadding:PaddingValues){
                 shape = RoundedCornerShape(25.dp)
             )
             {
-
+                /*
                 IconButton(content = {
                     Icon(
                         Icons.Filled.KeyboardArrowDown,
@@ -99,6 +99,7 @@ fun ChatLog(innerPadding:PaddingValues){
                 },
                     onClick = { coroutineScope.launch { listState.animateScrollToItem(index = listState.layoutInfo.totalItemsCount - 1) } }
                 )
+                */
                 var opening by remember { mutableStateOf(true) }
                 LaunchedEffect(key1 = opening) {
                     if(opening){
