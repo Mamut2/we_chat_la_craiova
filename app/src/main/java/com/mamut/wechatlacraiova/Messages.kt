@@ -49,7 +49,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-var texts = mutableStateListOf<String>()
+var msgList = mutableStateListOf<TimestmpMsgData>()
 const val buffer = 1
 
 @Composable
@@ -90,8 +90,8 @@ fun ChatLog(innerPadding:PaddingValues){
                     .fillMaxWidth()
                     .weight(90f)
             ) {
-                items(texts){text->
-                    Message(text = text)
+                items(msgList){msg->
+                    Message(text = msg.text)
                 }
             }
 
@@ -119,3 +119,8 @@ fun Message(text: String){
         )
     }
 }
+
+data class TimestmpMsgData(
+    val text:String,
+    val time:String
+)

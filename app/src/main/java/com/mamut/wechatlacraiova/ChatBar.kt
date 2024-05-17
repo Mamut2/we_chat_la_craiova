@@ -42,6 +42,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.text.DateFormat.getDateTimeInstance
+import java.text.SimpleDateFormat
+import java.util.Date
 
 @OptIn(ExperimentalMaterial3Api::class)
 
@@ -89,11 +92,18 @@ fun ChatBar(modifier: Modifier = Modifier){
                         .clip(RoundedCornerShape(50.dp, 50.dp, 50.dp, 50.dp)),
                     placeholder = { Text(text = "Enter text...", color = Color(92, 88, 88, 255))}
                 )
+
                 IconButton(
                     onClick = {
                         val textWithRemovedEndWhiteSpaces = checkTextField(fieldText)
+                        val sdf = SimpleDateFormat("dd-MM-yyyy '\n'HH:mm")
+                        val currentDateAndTime = sdf.format(Date())
+                        val msg = TimestmpMsgData(
+                            text = textWithRemovedEndWhiteSpaces,
+                            time = currentDateAndTime
+                        )
                         if(textWithRemovedEndWhiteSpaces != "") {
-                            pushMessage(textWithRemovedEndWhiteSpaces)
+                            pushMessage(msg)
                             fieldText = ""
                         }
                     },

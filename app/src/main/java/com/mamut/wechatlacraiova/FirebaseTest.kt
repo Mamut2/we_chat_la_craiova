@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import com.google.firebase.database.getValue
 import com.google.firebase.database.snapshots
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
@@ -32,20 +33,21 @@ lateinit var dbr: DatabaseReference
 var lastLoadedMessageIndex = 0
 const val numberOfMessagesToLoad = 21
 
-fun pushMessage(message: String ) {
+
+fun pushMessage(message: TimestmpMsgData ) {
     dbr.push().setValue(message)
 }
 
 fun readMessages() {
     dbr.get().addOnSuccessListener { data ->
         for (i in data.childrenCount - 1 downTo (if (data.childrenCount - numberOfMessagesToLoad < 0) 0 else data.childrenCount - numberOfMessagesToLoad))
-            texts.add(data.children.elementAt(i.toInt()).value.toString())
+            data.children.elementAt(i.toInt()).getValue<TimestmpMsgData>()?.let { msgList.add(it) }
         lastLoadedMessageIndex = (if (data.childrenCount - numberOfMessagesToLoad < 0) 0 else data.childrenCount - numberOfMessagesToLoad).toInt()
     }
 
     dbr.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot){
-                if(!texts.isEmpty()) texts.add(0, dataSnapshot.children.last().value.toString())
+                if(!msgList.isEmpty()) dataSnapshot.children.last().getValue<TimestmpMsgData>()?.let { msgList.add(it) }
             }
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
@@ -58,7 +60,7 @@ fun readMessages() {
 fun loadOldMessages() {
     dbr.get().addOnSuccessListener { data ->
         for (i in lastLoadedMessageIndex - 1 downTo  (if (lastLoadedMessageIndex - numberOfMessagesToLoad < 0) 0 else lastLoadedMessageIndex - numberOfMessagesToLoad))
-            texts.add(data.children.elementAt(i).value.toString())
+            data.children.elementAt(i).getValue<TimestmpMsgData>()?.let { msgList.add(it) }
         lastLoadedMessageIndex = (if (lastLoadedMessageIndex - numberOfMessagesToLoad < 0) 0 else lastLoadedMessageIndex - numberOfMessagesToLoad).toInt()
     }
 }
