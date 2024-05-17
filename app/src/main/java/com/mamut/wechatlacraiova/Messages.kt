@@ -50,6 +50,7 @@ import kotlinx.coroutines.launch
 
 
 var texts = mutableStateListOf<String>()
+const val buffer = 1
 
 @Composable
 fun ChatLog(innerPadding:PaddingValues){
@@ -71,18 +72,19 @@ fun ChatLog(innerPadding:PaddingValues){
                     .weight(5f)
                     .fillMaxSize()
             )
-            val listState = rememberLazyListState()
 
+            val listState = rememberLazyListState()
             val reachedTop: Boolean by remember {
                 derivedStateOf {
-                    val firstVisibleItem = listState.layoutInfo.visibleItemsInfo.firstOrNull()
-                    firstVisibleItem?.index == 0
+                    val lastVisibleItem = listState.layoutInfo.visibleItemsInfo.lastOrNull()
+                    lastVisibleItem?.index != 0 && lastVisibleItem?.index == listState.layoutInfo.totalItemsCount - buffer
                 }
             }
 
             LazyColumn(
                 state=listState,
                 verticalArrangement = Arrangement.spacedBy(5.dp),
+                reverseLayout = true,
                 modifier = Modifier
                     .padding(0.dp, 5.dp, 0.dp, 10.dp)
                     .fillMaxWidth()
@@ -93,14 +95,7 @@ fun ChatLog(innerPadding:PaddingValues){
                 }
             }
 
-            LaunchedEffect(key1 = finishedLoadingMessages) {
-                if(finishedLoadingMessages){
-                    listState.animateScrollToItem(index = listState.layoutInfo.totalItemsCount - 1)
-                    finishedLoadingMessages = false
-                }
-            }
-
-            LaunchedEffect(reachedTop) {
+            LaunchedEffect(key1 = reachedTop) {
                 if(reachedTop) loadOldMessages()
             }
         }
