@@ -27,6 +27,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.Updater
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -69,7 +70,7 @@ fun ChatLog(innerPadding:PaddingValues){
                     .fillMaxSize()
             )
             val listState = rememberLazyListState()
-            val coroutineScope = rememberCoroutineScope()
+
             LazyColumn(
                 state=listState,
                 verticalArrangement = Arrangement.spacedBy(5.dp),
@@ -83,32 +84,11 @@ fun ChatLog(innerPadding:PaddingValues){
                 }
             }
 
-            Surface(color=Color.Yellow,
-                modifier = Modifier
-                    .align(Alignment.End)
-                    .padding(0.dp, 0.dp, 15.dp, 10.dp),
-                shape = RoundedCornerShape(25.dp)
-            )
-            {
-                /*
-                IconButton(content = {
-                    Icon(
-                        Icons.Filled.KeyboardArrowDown,
-                        contentDescription = null
-                    )
-                },
-                    onClick = { coroutineScope.launch { listState.animateScrollToItem(index = listState.layoutInfo.totalItemsCount - 1) } }
-                )
-                */
-                var opening by remember { mutableStateOf(true) }
-                LaunchedEffect(key1 = opening) {
-                    if(opening){
-                        delay(500)
-                        listState.animateScrollToItem(index = listState.layoutInfo.totalItemsCount - 1)
-                        opening=false
-                    }
+            LaunchedEffect(key1 = finishedLoadingMessages) {
+                if(finishedLoadingMessages){
+                    listState.animateScrollToItem(index = listState.layoutInfo.totalItemsCount - 1)
+                    finishedLoadingMessages = false
                 }
-
             }
         }
     }

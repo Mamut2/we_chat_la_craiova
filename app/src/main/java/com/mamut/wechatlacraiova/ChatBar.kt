@@ -91,10 +91,11 @@ fun ChatBar(modifier: Modifier = Modifier){
                 )
                 IconButton(
                     onClick = {
-
-                        if(checkTextField(fieldText.toString()) != "") {
-                            pushMessage(fieldText.toString())
+                        val textWithRemovedEndWhiteSpaces = checkTextField(fieldText)
+                        if(textWithRemovedEndWhiteSpaces != "") {
+                            pushMessage(textWithRemovedEndWhiteSpaces)
                             fieldText = ""
+                            finishedLoadingMessages = true
                         }
                     },
                     content = {
@@ -109,10 +110,10 @@ fun ChatBar(modifier: Modifier = Modifier){
     }
 }
 fun checkTextField(text:String):String {
-    if(text != "" && text[text.length - 1] != ' ') {
-        if (text[text.length - 1] == '\n')
-            return checkTextField(text.dropLast(1))
-        else return text
+    if(text != "") {
+        return if (text[text.length - 1] == '\n' || text[text.length - 1] == ' ')
+            checkTextField(text.dropLast(1))
+        else text
     }
     return ""
 }

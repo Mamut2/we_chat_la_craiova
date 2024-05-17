@@ -7,6 +7,10 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
@@ -29,7 +33,7 @@ val db: FirebaseFirestore
         return Firebase.firestore
     }
 
-var finishedLoadingMessages = false
+var finishedLoadingMessages by mutableStateOf(false)
 
 fun pushMessage(message: String ) {
     dbr.push().setValue(message)
