@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -26,6 +27,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -37,6 +39,7 @@ import androidx.compose.ui.graphics.colorspace.ColorSpace
 import androidx.compose.ui.graphics.colorspace.ColorSpaces
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 
@@ -62,8 +65,10 @@ fun ChatLog(innerPadding:PaddingValues){
                     .weight(5f)
                     .fillMaxSize()
             )
+
             val listState = rememberLazyListState()
             val coroutineScope = rememberCoroutineScope()
+
             LazyColumn(
                 state=listState,
                 verticalArrangement = Arrangement.spacedBy(5.dp),
@@ -76,6 +81,8 @@ fun ChatLog(innerPadding:PaddingValues){
                     Message(text = text)
                 }
             }
+
+            // Buton de scroll la ultimu mesaj
             Surface(color=Color.Yellow,
                 modifier = Modifier
                     .align(Alignment.End)
