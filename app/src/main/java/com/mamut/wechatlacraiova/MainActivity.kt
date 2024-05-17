@@ -32,6 +32,8 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.database.FirebaseDatabase
 import com.mamut.wechatlacraiova.ui.theme.WeChatLaCraiovaTheme
 
+var scrollToBottom by mutableStateOf(false)
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +48,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             WeChatLaCraiovaTheme {
                 MainUI()
-
             }
         }
     }
@@ -54,26 +55,23 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainUI(modifier: Modifier = Modifier) {
-    //InitializeListState()
-    val listState = rememberLazyListState()
     Scaffold (
         bottomBar = { ChatBar()},
         containerColor = Color(186, 212, 170, 255),
         content = { innerPadding -> ChatLog(innerPadding) },
-        /*floatingActionButton = {
+        floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                          //absolut nmc, inca n-am reusit sa-l fac sa dea scroll in jos de aici
-                    //coroutineScope().launch { listState?.animateScrollToItem(index = listState!!.layoutInfo.totalItemsCount - 1) }
+                    scrollToBottom = true
                 },
                 content = {Icon(Icons.Filled.KeyboardArrowDown, contentDescription = "Bottom of messaages")},
                 containerColor = Color(255, 233, 125, 255),
                 elevation = FloatingActionButtonDefaults.elevation(2.5.dp),
                 shape = CircleShape,
-                modifier = Modifier.padding(0.dp, 0.dp, 10.dp, 10.dp).size(30.dp)
+                modifier = Modifier.padding(0.dp, 0.dp, 10.dp, 0.dp).size(30.dp)
 
             )
-        }*/
+        }
     )
 }
 

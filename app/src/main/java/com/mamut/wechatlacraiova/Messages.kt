@@ -95,8 +95,12 @@ fun ChatLog(innerPadding:PaddingValues){
                 }
             }
 
-            LaunchedEffect(key1 = reachedTop) {
+            LaunchedEffect(key1 = reachedTop, key2 = scrollToBottom) {
                 if(reachedTop) loadOldMessages()
+                if(scrollToBottom) {
+                    listState.animateScrollToItem(0)
+                    scrollToBottom = false
+                }
             }
         }
     }
