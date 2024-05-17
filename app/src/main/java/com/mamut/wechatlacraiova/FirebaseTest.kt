@@ -47,7 +47,7 @@ fun readMessages() {
 
     dbr.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot){
-                if(!msgList.isEmpty()) dataSnapshot.children.last().getValue<TimestmpMsgData>()?.let { msgList.add(it) }
+                if(!msgList.isEmpty()) dataSnapshot.children.last().getValue<TimestmpMsgData>()?.let {msgList.add(0, it) }
             }
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value

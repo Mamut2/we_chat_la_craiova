@@ -90,8 +90,8 @@ fun ChatLog(innerPadding:PaddingValues){
                     .fillMaxWidth()
                     .weight(90f)
             ) {
-                items(msgList){msg->
-                    Message(text = msg.text)
+                items(msgList){ msg->
+                    msg.text?.let { Message(text = it) }
                 }
             }
 
@@ -125,6 +125,6 @@ fun Message(text: String){
 }
 
 data class TimestmpMsgData(
-    val text:String,
-    val time:String
+    val text:String? = null,
+    val time:String? = null
 )
