@@ -69,11 +69,11 @@ fun ChatLog(innerPadding:PaddingValues){
             val listState = rememberLazyListState()
             val coroutineScope = rememberCoroutineScope()
 
-            LaunchedEffect(key1 = finishedLoadingMessages) {
+            /*LaunchedEffect(key1 = finishedLoadingMessages) {
                 coroutineScope.launch {
                     listState.animateScrollToItem(index = listState.layoutInfo.totalItemsCount - 1)
                 }
-            }
+            }*/
 
             LazyColumn(
                 state = listState,
