@@ -29,6 +29,8 @@ val db: FirebaseFirestore
         return Firebase.firestore
     }
 
+var finishedLoadingMessages = false
+
 fun pushMessage(message: String ) {
     dbr.push().setValue(message)
 }
@@ -38,6 +40,7 @@ fun readMessages(){
         data.children.forEach{
             texts.add(it.value.toString())
         }
+        finishedLoadingMessages = true
     })
 
     dbr.addValueEventListener(object: ValueEventListener{
