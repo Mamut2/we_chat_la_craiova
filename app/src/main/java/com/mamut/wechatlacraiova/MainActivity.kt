@@ -101,7 +101,6 @@ fun MainUI(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .padding(0.dp, 0.dp, 10.dp, 0.dp)
                     .size(30.dp)
-
             )
         }
     )

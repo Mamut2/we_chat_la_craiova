@@ -104,8 +104,11 @@ fun ChatLog(innerPadding:PaddingValues){
                 }
             }
 
-            LaunchedEffect(key1 = reachedTop, key2 = scrollToBottom) {
+            LaunchedEffect(key1 = reachedTop) {
                 if(reachedTop) loadOldMessages()
+            }
+
+            LaunchedEffect(key1 = scrollToBottom) {
                 if(scrollToBottom) {
                     listState.animateScrollToItem(0)
                     scrollToBottom = false
@@ -117,7 +120,10 @@ fun ChatLog(innerPadding:PaddingValues){
 
 @Composable
 fun Message(text: String, time: String){
-    Row(horizontalArrangement = Arrangement.Start,modifier = Modifier.fillMaxWidth().wrapContentSize().padding(0.dp, 0.dp, 0.dp, 0.dp)) {
+    Row(horizontalArrangement = Arrangement.Start,modifier = Modifier
+        .fillMaxWidth()
+        .wrapContentSize()
+        .padding(0.dp, 0.dp, 0.dp, 0.dp)) {
         Card(
             elevation = CardDefaults.cardElevation(2.dp),
 
@@ -144,7 +150,10 @@ fun Message(text: String, time: String){
             fontSize = 9.sp,
             softWrap = false,
             color = Color.Gray,
-            modifier = Modifier.align(Alignment.CenterVertically).padding(5.dp, 0.dp, 0.dp, 0.dp).fillMaxWidth(),
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .padding(5.dp, 0.dp, 0.dp, 0.dp)
+                .fillMaxWidth(),
             style = TextStyle(lineHeight = 15.sp)
 
         )
