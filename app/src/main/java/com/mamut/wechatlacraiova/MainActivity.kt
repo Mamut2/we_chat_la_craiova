@@ -35,9 +35,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.FirebaseDatabase
-import com.mamut.wechatlacraiova.ui.theme.LoginScreen
-import com.mamut.wechatlacraiova.ui.theme.SignUpScreen
-import com.mamut.wechatlacraiova.ui.theme.User
 import com.mamut.wechatlacraiova.ui.theme.WeChatLaCraiovaTheme
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -77,8 +74,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun App(controller: NavHostController, startDestination: String){
     NavHost(navController=controller, startDestination = startDestination){
-        composable("login"){LoginScreen(controller)}
-        composable("signup"){SignUpScreen(controller)}
+        composable("login"){ LoginScreen(controller) }
+        composable("signup"){ SignUpScreen(controller) }
         composable("chat"){MainUI()}
     }
 }

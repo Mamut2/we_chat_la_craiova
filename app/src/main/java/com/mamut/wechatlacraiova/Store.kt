@@ -1,4 +1,4 @@
-package com.mamut.wechatlacraiova.ui.theme
+package com.mamut.wechatlacraiova
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
