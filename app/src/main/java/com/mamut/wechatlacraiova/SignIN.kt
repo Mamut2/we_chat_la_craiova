@@ -1,4 +1,4 @@
-package com.mamut.wechatlacraiova.ui.theme
+package com.mamut.wechatlacraiova
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
