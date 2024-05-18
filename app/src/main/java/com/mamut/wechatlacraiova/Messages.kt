@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -116,20 +117,24 @@ fun ChatLog(innerPadding:PaddingValues){
 
 @Composable
 fun Message(text: String, time: String){
-    Row(horizontalArrangement = Arrangement.Start,modifier = Modifier.wrapContentSize()) {
+    Row(horizontalArrangement = Arrangement.Start,modifier = Modifier.fillMaxWidth().wrapContentSize().padding(0.dp, 0.dp, 0.dp, 0.dp)) {
         Card(
             elevation = CardDefaults.cardElevation(2.dp),
+
             modifier = Modifier
-                //.fillMaxWidth()
                 .padding(10.dp, 3.dp, 0.dp, 0.dp)
                 .wrapContentSize(
                     align = Alignment.CenterStart
-                ),
+                )
+                .widthIn(0.dp, 325.dp)
+                //.fillMaxWidth()
+
         ) {
 
             Text(
                 text = text,
-                modifier = Modifier.padding(10.dp)
+
+                modifier = Modifier.padding(10.dp)//.fillMaxWidth()
             )
 
 
@@ -137,8 +142,9 @@ fun Message(text: String, time: String){
         Text(
             text = time,
             fontSize = 9.sp,
+            softWrap = false,
             color = Color.Gray,
-            modifier = Modifier.align(Alignment.CenterVertically).padding(5.dp, 0.dp, 0.dp, 0.dp),
+            modifier = Modifier.align(Alignment.CenterVertically).padding(5.dp, 0.dp, 0.dp, 0.dp).fillMaxWidth(),
             style = TextStyle(lineHeight = 15.sp)
 
         )
