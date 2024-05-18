@@ -51,7 +51,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -72,4 +71,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.firebase:firebase-database")
+    implementation ("com.firebaseui:firebase-ui-auth:7.2.0")
+    implementation ("androidx.navigation:navigation-compose:2.6.0")
+    implementation ("androidx.datastore:datastore-preferences:1.0.0")
 }
