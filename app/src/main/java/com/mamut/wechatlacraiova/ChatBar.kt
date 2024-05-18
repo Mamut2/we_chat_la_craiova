@@ -98,7 +98,7 @@ fun ChatBar(modifier: Modifier = Modifier){
                 IconButton(
                     onClick = {
                         val textWithRemovedEndWhiteSpaces = checkTextField(fieldText)
-                        val sdf = SimpleDateFormat("dd-MM-yyyy '\n'HH:mm")
+                        val sdf = SimpleDateFormat("dd-MM-yyyy'\n'HH:mm")
                         val currentDateAndTime = sdf.format(Date())
                         val msg = TimestmpMsgData(
                             text = textWithRemovedEndWhiteSpaces,

@@ -7,10 +7,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -43,8 +45,11 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.colorspace.ColorSpace
 import androidx.compose.ui.graphics.colorspace.ColorSpaces
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -91,7 +96,10 @@ fun ChatLog(innerPadding:PaddingValues){
                     .weight(90f)
             ) {
                 items(msgList){ msg->
-                    msg.text?.let { Message(text = it) }
+                    msg.text?.let {
+                        msg.time?.let {it}?.let { it1 -> Message(text = it, time = it1) }
+
+                    }
                 }
             }
 
@@ -107,19 +115,32 @@ fun ChatLog(innerPadding:PaddingValues){
 }
 
 @Composable
-fun Message(text: String){
-    Card(
-        elevation = CardDefaults.cardElevation(2.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp, 0.dp, 40.dp, 0.dp)
-            .wrapContentSize(
-                align = Alignment.CenterStart
-            ),
-    ) {
+fun Message(text: String, time: String){
+    Row(horizontalArrangement = Arrangement.Start,modifier = Modifier.wrapContentSize()) {
+        Card(
+            elevation = CardDefaults.cardElevation(2.dp),
+            modifier = Modifier
+                //.fillMaxWidth()
+                .padding(10.dp, 3.dp, 0.dp, 0.dp)
+                .wrapContentSize(
+                    align = Alignment.CenterStart
+                ),
+        ) {
+
+            Text(
+                text = text,
+                modifier = Modifier.padding(10.dp)
+            )
+
+
+        }
         Text(
-            text = text,
-            modifier = Modifier.padding(10.dp)
+            text = time,
+            fontSize = 9.sp,
+            color = Color.Gray,
+            modifier = Modifier.align(Alignment.CenterVertically).padding(5.dp, 0.dp, 0.dp, 0.dp),
+            style = TextStyle(lineHeight = 15.sp)
+
         )
     }
 }
