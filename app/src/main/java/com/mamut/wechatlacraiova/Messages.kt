@@ -84,8 +84,11 @@ fun ChatLog(innerPadding:PaddingValues){
                 }
             }
 
-            LaunchedEffect(key1 = reachedTop, key2 = scrollToBottom) {
+            LaunchedEffect(key1 = reachedTop) {
                 if(reachedTop) loadOldMessages()
+            }
+
+            LaunchedEffect(key1 = scrollToBottom) {
                 if(scrollToBottom) {
                     listState.animateScrollToItem(0)
                     scrollToBottom = false
