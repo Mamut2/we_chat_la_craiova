@@ -100,7 +100,7 @@ fun Message(text: String, time: String, userID: String){
     Column {
         Text(
             text = userID,
-            fontSize = 8.sp,
+            fontSize = 10.sp,
             color = Color.Gray,
             modifier = Modifier.padding(8.dp)
         )
@@ -133,19 +133,19 @@ fun Message(text: String, time: String, userID: String){
             }
         //}
 
-        Text(
-            text = time,
-            fontSize = 9.sp,
-            softWrap = false,
-            color = Color.Gray,
-            modifier = Modifier
-                .align(Alignment.CenterVertically)
-                .padding(5.dp, 0.dp, 0.dp, 0.dp)
-                .fillMaxWidth(),
-            style = TextStyle(lineHeight = 15.sp)
+            Text(
+                text = time,
+                fontSize = 9.sp,
+                softWrap = false,
+                color = Color.Gray,
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .padding(5.dp, 0.dp, 0.dp, 0.dp)
+                    .fillMaxWidth(),
+                style = TextStyle(lineHeight = 15.sp)
 
-        )
-    }
+            )
+        }
     }
 }
 

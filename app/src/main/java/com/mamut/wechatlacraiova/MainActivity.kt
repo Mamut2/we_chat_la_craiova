@@ -6,6 +6,7 @@ import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -29,6 +30,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -76,14 +78,17 @@ fun App(controller: NavHostController, startDestination: String){
     NavHost(navController=controller, startDestination = startDestination){
         composable("login"){ LoginScreen(controller) }
         composable("signup"){ SignUpScreen(controller) }
-        composable("chat"){MainUI()}
+        composable("chat"){MainUI(modifier= Modifier, controller)}
+        composable("settings"){settings(controller)}
     }
 }
 
 @Composable
-fun MainUI(modifier: Modifier = Modifier) {
-    Scaffold (
-        bottomBar = { ChatBar()},
+fun MainUI(modifier: Modifier = Modifier,controller: NavController) {
+    Column() {
+    TopBar(controller)
+    Scaffold(
+        bottomBar = { ChatBar() },
         containerColor = Color(186, 212, 170, 255),
         content = { innerPadding -> ChatLog(innerPadding) },
         floatingActionButton = {
@@ -91,7 +96,12 @@ fun MainUI(modifier: Modifier = Modifier) {
                 onClick = {
                     scrollToBottom = true
                 },
-                content = {Icon(Icons.Filled.KeyboardArrowDown, contentDescription = "Bottom of messaages")},
+                content = {
+                    Icon(
+                        Icons.Filled.KeyboardArrowDown,
+                        contentDescription = "Bottom of messaages"
+                    )
+                },
                 containerColor = Color(255, 233, 125, 255),
                 elevation = FloatingActionButtonDefaults.elevation(2.5.dp),
                 shape = CircleShape,
@@ -102,12 +112,13 @@ fun MainUI(modifier: Modifier = Modifier) {
         }
     )
 }
+}
 
 @Preview(showBackground = true)
 @Composable
 fun UIPreview() {
     WeChatLaCraiovaTheme {
-        MainUI()
+        MainUI(modifier = Modifier,controller = rememberNavController())
     }
 }
 
